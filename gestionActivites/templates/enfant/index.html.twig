@@ -1,0 +1,61 @@
+{% extends 'baseChild.html.twig' %}
+
+{% block title %}Activity index{% endblock %}
+
+{% block body %}
+    <h1 class="mx-5 text-center" style="color: white ; text-align: center" >Enfant Dashboard</h1>
+
+    <table class="table table-hover table-bordered table-primary">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for activity in activities %}
+            <tr>
+                <td>{{ activity.id }}</td>
+                <td>{{ activity.name }}</td>
+                <td>{{ activity.description | u.truncate(50,'...',false) | raw }}</td>
+                <td>
+                    <a href="{{ path('activity_show_child', {'id': activity.id}) }}">show</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+
+    </table>
+
+    <div style="display: flex;">
+        <div class="card" style="width: auto;flex-grow: 1;">
+            <div class="card-body">
+                <h5 class="card-title">Register to an Activity</h5>
+                <p class="card-text">Si vous souhaitez vous inscrire ou vous desisncrire a differentes activites</p>
+                <a href="/registration/{{ app.user.id }}/register" class="btn btn-warning stretched-link">Click Here</a>
+            </div>
+        </div>
+
+        <div class="card" style="width: auto;flex-grow: 1;">
+            <div class="card-body">
+                <h5 class="card-title">Activities Registered</h5>
+                <p class="card-text">Contient les differentes activites auxquelles vous etes inscrit</p>
+                <a href="/activity/inscrit/{{ app.user.id }}" class="btn btn-warning stretched-link">Click Here</a>
+            </div>
+        </div>
+
+    </div>
+
+
+
+{% endblock %}
+
+
+
+

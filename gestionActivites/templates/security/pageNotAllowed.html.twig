@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Page Not Allowed{% endblock %}
+
+{% block body %}
+    <h1>Error Page Not Allowed</h1>
+
+    <p> Vous ne pouvez pas acceder a cete page, votre role ne vous le permet pas</p>
+    <div style="display: flex;">
+        <div class="card" style="width: auto; flex-grow: 1;"  >
+            <div class="card-body">
+                <h5 class="card-title">Login</h5>
+                <p class="card-text">Cliquez la pour vous rediriger a la page de connexion</p>
+                <a href="{{ path('app_login') }}" class="btn btn-primary stretched-link">Click Here</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

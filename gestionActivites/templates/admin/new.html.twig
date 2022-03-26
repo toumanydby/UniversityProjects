@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New User{% endblock %}
+
+{% block body %}
+    <h1 style="color: white ; text-align: center">Create new User</h1>
+
+    {{ include('admin/_form.html.twig') }}
+
+    <div class="card" style=" flex-grow: 1;">
+        <div class="card-body" >
+            <h5 class="card-title">Back to the activity list</h5>
+            <p class="card-text">Contient toutes les activites</p>
+            <a href="{{ path('user_animator_index') }}" class="btn btn-warning stretched-link">Click Here</a>
+        </div>
+    </div>
+{% endblock %}

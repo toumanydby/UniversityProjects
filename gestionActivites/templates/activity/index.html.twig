@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Activity index{% endblock %}
+
+{% block body %}
+    <h1 class="mx-5 text-center text-white">Animateur Dashboard</h1>
+
+    <table class="table table-hover table-bordered table-primary">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for activity in activities %}
+            <tr>
+                <td>{{ activity.id }}</td>
+                <td>{{ activity.name }}</td>
+                <td>{{ activity.description | u.truncate(50,'...',false) | raw }}</td>
+                <td>
+                    <a href="{{ path('activity_show', {'id': activity.id}) }}">show</a>
+                    <a href="{{ path('activity_edit', {'id': activity.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+
+    </table>
+
+    <div style="display: flex;">
+        <div class="card" style="width: auto; flex-grow: 1;"  >
+            <div class="card-body">
+                <h5 class="card-title">My Activities</h5>
+                <p class="card-text">Contient les differentes activites qui vous appartiennent</p>
+                <a href="/activity/myActivity" class="btn btn-warning stretched-link">Click Here</a>
+            </div>
+        </div>
+
+
+        <div class="card" style="width: auto;flex-grow: 1;">
+            <div class="card-body">
+                <h5 class="card-title">Create a new Activity</h5>
+                <p class="card-text">Cree une nouvelle activite avec les differents champs voulus</p>
+                <a href="{{ path('activity_new') }}" class="btn btn-warning stretched-link">Click Here</a>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}
+
+
+
+

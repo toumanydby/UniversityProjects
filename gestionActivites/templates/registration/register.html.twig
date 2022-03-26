@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Log in</title>
+
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('logIn') }}
+    {% endblock %}
+
+    {% block javascripts %}
+        {{ encore_entry_script_tags('logIn') }}
+    {% endblock %}
+</head>
+<body>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+
+                {{ form_start(registrationForm , {
+                    'attr': { 'class': 'box' }
+                }) }}
+                <h1>Register</h1>
+                {{ form_row(registrationForm.nom) }}
+                {{ form_row(registrationForm.prenom) }}
+                {{ form_row(registrationForm.username) }}
+                {{ form_row(registrationForm.plainPassword) }}
+                {{ form_row(registrationForm.agreeTerms) }}
+
+                <a class="forgot text-muted" href="/">Sign in here</a>
+                <input type="submit" class="btn" value="Register">
+                {{ form_end(registrationForm) }}
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>

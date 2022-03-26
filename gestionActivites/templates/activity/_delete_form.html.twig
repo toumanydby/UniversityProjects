@@ -1,0 +1,10 @@
+<form method="post" action="{{ path('activity_delete', {'id': activity.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+    <div class="card" style="flex-grow: 1;" >
+        <div class="card-body">
+            <h5 class="card-title">Delete</h5>
+            <p class="card-text">Supprime l'activite en cours</p>
+            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ activity.id) }}">
+            <button class="btn btn-danger stretched-link">Delete</button>
+        </div>
+    </div>
+</form>

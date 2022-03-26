@@ -1,0 +1,10 @@
+<form method="post" action="{{ path('user_animator_delete', {'id': user.id}) }}" onsubmit="return confirm('Are you sure you want to delete this user?');">
+    <div class="card" style="width: 1000px; flex-grow: 1;"  >
+        <div class="card-body">
+            <h5 class="card-title">Delete</h5>
+            <p class="card-text">Supprime l'utilisateur en cours</p>
+            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
+            <button class="btn btn-danger stretched-link">Delete</button>
+        </div>
+    </div>
+</form>

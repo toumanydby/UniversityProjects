@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}My Activity index{% endblock %}
+
+{% block body %}
+    <h1 style="color: white;text-align: center">My Activity's</h1>
+
+    <table class="table table-hover table-bordered table-primary">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for activity in activities %}
+            <tr>
+                <td>{{ activity.id }}</td>
+                <td>{{ activity.name }}</td>
+                <td>{{ activity.description | raw }}</td>
+                <td>
+                    <a href="{{ path('myActivity_show', {'id': activity.id}) }}">show</a>
+                    <a href="{{ path('activity_edit', {'id': activity.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        <div class="card" style="width: auto; flex-grow: 1;"  >
+            <div class="card-body">
+                <h5 class="card-title">Activities</h5>
+                <p class="card-text">Contient toutes les activites</p>
+                <a href="/activity" class="btn btn-warning stretched-link">Click Here</a>
+            </div>
+        </div>
+{% endblock %}

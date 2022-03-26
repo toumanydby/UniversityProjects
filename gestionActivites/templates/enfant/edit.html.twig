@@ -1,0 +1,18 @@
+{% extends 'baseChild.html.twig' %}
+
+{% block title %}Register Activity{% endblock %}
+
+{% block body %}
+    <h1 class="mx-5 text-center" style="color: white;text-align: center">Register to the activities</h1>
+
+    {{ include('enfant/_form.html.twig', {'button_label': 'Valider'}) }}
+
+    <div class="card" style="width: 18rem; flex-grow: 1;"  >
+        <div class="card-body">
+            <h5 class="card-title">Back to the activity list</h5>
+            <p class="card-text">Contient toutes les activites</p>
+            <a href="{{ path('activity_index_child') }}" class="btn btn-warning stretched-link">Click Here</a>
+        </div>
+    </div>
+
+{% endblock %}

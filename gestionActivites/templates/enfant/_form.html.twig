@@ -1,0 +1,26 @@
+{{ form_start(form) }}
+    {{ form_row(form.activityInscrit, {
+        'label' : 'Activites auxquelles vous etes inscrit',
+        'label_attr' : { 'style' : 'font-size: 25px; color:white'}
+    }) }}
+<div class="card" style="width: 18rem; flex-grow: 1;">
+    <div class="card-body" >
+        <h5 class="card-title">Save the changes</h5>
+        <p class="card-text">Enregistrer  les changements</p>
+        <button class="btn btn-success">{{ button_label|default('Save') }}</button>
+    </div>
+</div>
+
+{{ form_end(form) }}
+
+<script>
+    let children = document.getElementById('user_activityInscrit').childNodes;
+    for (let i = 0; i < children.length; i++) {
+        if (children[i].nodeName === 'INPUT'){
+            children[i].className += "btn-check";
+        }
+        else if (children[i].nodeName === 'LABEL'){
+            children[i].className += "btn btn-outline-warning";
+        }
+    }
+</script>

@@ -1,0 +1,20 @@
+{{ form_start(form) }}
+<div class="mb-3">
+    {{ form_row(form.name) }}
+</div>
+
+<div class="mb-3">
+    {{ form_row(form.description) }}
+</div>
+
+<div class="card form-control" style="width: 18rem; ">
+    <div class="card-body" >
+        <h5 class="card-title">Save the changes</h5>
+        <p class="card-text">Enregistrer  les changements</p>
+        <button class="btn btn-success">{{ button_label|default('Save') }}</button>
+    </div>
+</div>
+<br>
+
+
+{{ form_end(form) }}

@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Error Not Allowed{% endblock %}
+
+{% block body %}
+    <h1 style="color: white">Error Not Allowed</h1>
+
+    <p style="color: white"> Vous ne pouvez pas modifier ou supprimer cette activite car vous n'en n'etes pas le proprietaire</p>
+    <div style="display: flex;">
+        <div class="card" style="width: auto; flex-grow: 1;"  >
+            <div class="card-body">
+                <h5 class="card-title">Activities</h5>
+                <p class="card-text">Contient toutes les activites</p>
+                <a href="/activity" class="btn btn-warning stretched-link">Click Here</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Activity{% endblock %}
+
+{% block body %}
+    <h1 style="color: white ; text-align: center">Create new Activity</h1>
+
+    {{ include('activity/_form.html.twig') }}
+
+    <div class="card" style=" flex-grow: 1" >
+        <div class="card-body" style="margin: auto">
+            <h5 class="card-title">Back to list</h5>
+            <p class="card-text">Contient toutes les activites</p>
+            <a href="{{ path('activity_index') }}" class="btn btn-warning stretched-link">Click Here</a>
+        </div>
+    </div>
+
+{% endblock %}

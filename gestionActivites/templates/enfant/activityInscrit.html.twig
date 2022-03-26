@@ -1,0 +1,40 @@
+{% extends 'baseChild.html.twig' %}
+
+{% block title %}My Activities{% endblock %}
+
+{% block body %}
+    <h1 class="mx-5 text-center" style="color: white ; text-align: center">Activites auxquelles je suis inscrit</h1>
+
+    <table class="table table-hover table-bordered table-primary">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Description</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for activity in activities %}
+            <tr>
+                <td>{{ activity.id }}</td>
+                <td>{{ activity.name }}</td>
+                <td>{{ activity.description | raw }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        <div class="card" style="width: auto; flex-grow: 1;"  >
+            <div class="card-body">
+                <h5 class="card-title">Activities</h5>
+                <p class="card-text">Contient toutes les activites</p>
+                <a href="{{ path('activity_index_child') }}" class="btn btn-warning stretched-link">Click Here</a>
+            </div>
+        </div>
+
+
+{% endblock %}

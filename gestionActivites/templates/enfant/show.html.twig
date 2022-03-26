@@ -1,0 +1,36 @@
+{% extends 'baseChild.html.twig' %}
+
+{% block title %}Activity{% endblock %}
+
+{% block body %}
+    <h1 style="text-align: center ; color: white">Activity</h1>
+
+    <table class="table table-hover table-bordered table-primary">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ activity.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ activity.name }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ activity.description | raw }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div style="display: flex;">
+        <div class="card" style="width: 18rem; flex-grow: 1;"  >
+            <div class="card-body">
+                <h5 class="card-title">Activities</h5>
+                <p class="card-text">Retourne sur la liste des activites</p>
+                <a href="{{ path('activity_index_child') }}" class="btn btn-warning stretched-link">Click Here</a>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

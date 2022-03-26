@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User index{% endblock %}
+
+{% block body %}
+    <h1 style="color: white ; text-align: center">Admin Dashboard</h1>
+
+    <table class="table table-hover table-bordered table-primary">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Username</th>
+                <th>Roles</th>
+                <th>Password</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+                <td>{{ user.password }}</td>
+                <td>{{ user.nom }}</td>
+                <td>{{ user.prenom }}</td>
+                <td>
+                    <a href="{{ path('user_animator_show', {'id': user.id}) }}">show</a>
+                    <a href="{{ path('user_animator_edit', {'id': user.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div class="card" style="width: auto;flex-grow: 1;">
+        <div class="card-body">
+            <h5 class="card-title">Create a new User</h5>
+            <p class="card-text">Créer un nouveau utilisateur </p>
+            <a href="{{ path('user_animator_new') }}" class="btn btn-warning stretched-link">Click Here</a>
+        </div>
+    </div>
+
+{% endblock %}
