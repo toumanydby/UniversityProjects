@@ -1,0 +1,3 @@
+acc_max = 25
+depart = { x= 575, y = 550}
+couleur_arrivee = [255,0,0]
