@@ -1,0 +1,12 @@
+#!/usr/bin/env python3
+from hashlib import sha1
+from sys import argv
+m = sha1()
+m.update(argv[1].encode())
+m.update(b"-")
+m.update(argv[2].encode())
+d = m.digest()
+addr = [ (d[i]+d[i+6]) % 256 for i in range(6) ]
+addr[0] &= 0xfe
+addr[0] |= 0x02
+print(':'.join(map(lambda x : ("00"+hex(x)[2:])[-2:],addr)))

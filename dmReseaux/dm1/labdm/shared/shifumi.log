@@ -1,0 +1,29 @@
+200 >>> to ('10.0.1.1', 999) at Sun Nov 28 20:49:41 2021
+200 >>> to ('10.0.1.1', 999) at Sun Nov 28 20:49:42 2021
+200 >>> to ('10.0.1.1', 999) at Sun Nov 28 20:49:44 2021
+202 En l'attente d'un adversaire >>> to ('10.0.1.1', 999) at Sun Nov 28 20:49:44 2021
+200 >>> to ('10.0.1.1', 999) at Sun Nov 28 20:49:52 2021
+200 >>> to ('10.0.1.1', 999) at Sun Nov 28 20:49:55 2021
+200 >>> to ('10.0.1.1', 999) at Sun Nov 28 20:49:55 2021
+201 Demarrage de la partie >>> to ('10.0.1.1', 999) at Sun Nov 28 20:49:55 2021
+302 0 - 0 >>> to ('10.0.1.1', 999) at Sun Nov 28 20:49:55 2021
+302 0 - 0 >>> to ('10.0.1.1', 999) at Sun Nov 28 20:49:55 2021
+301 1 - 0 >>> to ('10.0.1.1', 999) at Sun Nov 28 20:50:13 2021
+301 0 - 1 >>> to ('10.0.1.1', 999) at Sun Nov 28 20:50:13 2021
+300 Le vainqueur de la partie est le joueur avec l'adresse 10.0.0.5 le score est de 1 - 0 bien joue!! >>> to ('10.0.1.1', 999) at Sun Nov 28 20:50:16 2021
+300 Le vainqueur de la partie est le joueur avec l'adresse 10.0.0.5 le score est de 1 - 0 bien joue!! >>> to ('10.0.1.1', 999) at Sun Nov 28 20:50:16 2021
+200 >>> to ('10.0.1.1', 999) at Sun Nov 28 21:28:03 2021
+200 >>> to ('10.0.1.1', 999) at Sun Nov 28 21:28:05 2021
+200 Quel est le nom de votre table ? >>> to ('10.0.1.1', 999) at Sun Nov 28 21:28:09 2021
+200 >>> to ('10.0.1.1', 999) at Sun Nov 28 21:28:11 2021
+200 Quel est le nom de la table que vous souhaitez rejoindre ? >>> to ('10.0.1.1', 999) at Sun Nov 28 21:28:15 2021
+500 >>> to ('10.0.1.1', 999) at Sun Nov 28 21:28:18 2021
+200 >>> to ('10.0.1.1', 999) at Sun Nov 28 21:28:28 2021
+200 Quel est le nom de la table que vous souhaitez rejoindre ? >>> to ('10.0.1.1', 999) at Sun Nov 28 21:28:29 2021
+500 >>> to ('10.0.1.1', 999) at Sun Nov 28 21:28:30 2021
+202 >>> to ('10.0.1.1', 999) at Sun Nov 28 21:28:39 2021
+200 >>> to ('10.0.1.1', 999) at Sun Nov 28 21:28:42 2021
+200 Quel est le nom de la table que vous souhaitez rejoindre ? >>> to ('10.0.1.1', 999) at Sun Nov 28 21:28:43 2021
+201 >>> to ('10.0.1.1', 999) at Sun Nov 28 21:28:48 2021
+302 0 - 0 >>> to ('10.0.1.1', 999) at Sun Nov 28 21:28:48 2021
+302 0 - 0 >>> to ('10.0.1.1', 999) at Sun Nov 28 21:28:48 2021

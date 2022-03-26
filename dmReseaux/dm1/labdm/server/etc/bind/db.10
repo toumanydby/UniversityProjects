@@ -1,0 +1,17 @@
+$TTL	60000
+@		IN	SOA	10.in-addr.arpa.	nobody.nowhere. (
+			1 ; serial
+			28 ; refresh
+			14 ; retry
+			3600000 ; expire
+			0 ; negative cache ttl
+			)
+@				IN	NS	1.1.0.10.in-addr.arpa.
+1.1.0.10.in-addr.arpa.	IN	A	10.0.1.1
+
+1.1.0	PTR	dns.iiia.net.
+1.1.0	PTR	www.iiia.net.
+1.0.0	PTR	pc1.iiia.net.
+2.0.0	PTR	pc2.iiia.net.
+3.0.0	PTR	pc3.iiia.net.
+4.0.0	PTR	pc4.iiia.net.

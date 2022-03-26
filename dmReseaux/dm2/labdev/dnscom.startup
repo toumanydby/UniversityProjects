@@ -1,0 +1,4 @@
+ip addr add 172.16.1.2/16 dev eth0
+ip addr add 42.13.37.42/16 dev eth1
+/etc/init.d/quagga start
+/etc/init.d/bind start

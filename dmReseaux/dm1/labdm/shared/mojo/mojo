@@ -1,0 +1,6 @@
+umount /etc/resolv.conf
+umount /etc/hosts
+echo '127.0.0.1	localhost' > /etc/hosts
+for eth in $(ip -br a | grep '^eth' | cut -d@ -f1); do
+    ip link set $eth address $(/shared/mojo/macaddr $HOSTNAME $eth)
+done

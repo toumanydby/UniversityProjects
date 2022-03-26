@@ -1,0 +1,16 @@
+$TTL	60000
+@		IN	SOA	dnsroot.	root.dnsroot. (
+			1 ; serial
+			28 ; refresh
+			14 ; retry
+			3600000 ; expire
+			60000 ; negative cache ttl
+			)
+@		IN	NS	dnsroot.
+dnsroot.	IN	A	192.203.230.10
+
+com.		IN	NS	dnscom.com.
+dnscom.com.	IN	A	42.13.37.42
+
+net.		IN	NS	dnsnet.net.
+dnsnet.net.	IN	A	54.16.64.54

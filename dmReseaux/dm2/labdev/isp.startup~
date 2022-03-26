@@ -1,0 +1,5 @@
+iptables -t filter -A FORWARD -s 192.168.0.0/16 -j DROP
+ip addr add 172.16.0.1/16 dev eth0
+ip addr add 1.2.3.4/24 dev eth1
+/etc/init.d/quagga start
+/etc/init.d/bind start

@@ -1,0 +1,12 @@
+$TTL	60000
+@		IN	SOA	dnsahcaira.ahcaira.com.	root.dnsahcaira.dnsahcaira.com. (
+			1 ; serial
+			28 ; refresh
+			14 ; retry
+			3600000 ; expire
+			60000 ; negative cache ttl
+			)
+@		IN	NS	dnsahcaira.ahcaira.com.
+dnsahcaira	IN	A	9.9.9.9
+www		IN	A	9.9.9.9
+

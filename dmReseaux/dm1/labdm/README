@@ -1,0 +1,70 @@
+Serveur Shifumi
+
+Le but de ce DM est d'écrire un serveur pour un jeu de shifumi en suivant un protocole fourni. Un lab est proposé contenant une machine server sur lequel lancer votre application, ainsi que 6 machines pc1 à pc6 sur lesquelles vous pourrez faire tourner un client. Une application cliente est fournie ("shared/clientshifumi.py").
+
+Vous devrez programmer ce serveur en python en utilisant l'API asyncio vue en TP.
+
+1. Le lab et le serveur
+
+La machine server du lab doit héberger le serveur, qui sera lancé au démarrage (commande à décommenter dans "server.startup"). Le code du serveur est contenu dans un fichier "servershifumi.py" placé dans le répertoire "shared" du lab. Au lancement, le serveur se positionne en écoute sur le port 999. Le client ("shared/clientshifumi.py"), exécuté depuis une des 6 autres machines, se connecte au serveur et l'échange débute par un message du serveur proposant les différents modes de jeu possibles (contre une IA, contre un adversaire quelconque, contre un adversaire spécifique). Selon la réponse du client, différents scénarios sont possibles et décrits plus bas.
+
+Lorsqu'un client se connecte pour jouer contre un adversaire hors IA, une table est créée pour héberger le client en attente. Une fois l'adversaire trouvé, le jeu démarre et la table est supprimée. Le serveur doit pouvoir gérer un nombre arbitraire de tables et de parties de n'importe quel type de manière concurrente.
+
+2. Le protocole
+
+On implémente un protocole textuel avec des messages envoyés par :
+- le serveur : de la forme "CCC: message" où "CCC" est un code entier sur 3 chiffres et "message" contient du texte; 
+- le client : de la forme "COMMAND: value" où "COMMAND" est une commande parmi {MODE, TNAME, NBROUNDS, PLAY} et "value" est un paramètre transmis sous forme de chaîne de caractères.
+Le message associé à un code peut porter de l'information, mais la syntaxe est libre. En revanche, "value" est un paramètre de la commande envoyée par le client.
+
+Le premier message du serveur utilise le code CCC = 200 et value contient la liste des modes possibles :
+- 0 pour une partie contre une IA (le module random de python se propose aimablement pour choisir les coups de l'IA);
+- 1 pour une partie contre un adversaire quelconque (le premier désirant jouer en mode 1 et choisissant la même durée de partie), on parlera de table sans nom;
+- 2 pour créer une partie sur une table nommée qu'un adversaire pourra rejoindre en donnant le nom de la table;
+- 3 pour rejoindre une table nommée.
+
+La réponse du client utlise la commande MODE et value est l'entier entre 0 et 3 correspondant au mode choisi.
+
+ 2.1 Mode 0 (IA)
+ Dans ce mode, le serveur poursuit avec le code 200 et un message demandant le nombre de coups à jouer. La réponse du client contient la commande NBROUNDS et le paramètre "value" est le nombre de coups que le client désire jouer (entier strictement positif). Tant que le paramètre est 0 ou n'est pas un entier, le serveur redemande le nombre de coups avec le code 400. Lorsque le paramètre est valide, le serveur envoie le code 200. La partie démarre ensuite (voir 2.5).
+
+ 2.2 Mode 1 (table sans nom)
+ Dans ce mode, le serveur poursuit avec le code 200 et un message demandant le nombre de coups à jouer. La réponse du client contient la commande NBROUNDS et le paramètre "value" est le nombre de coups que le client désire jouer (entier strictement positif). Tant que le paramètre est 0 ou n'est pas un entier, le serveur redemande le nombre de coups avec le code 400. Lorsque le paramètre est valide, le serveur envoie le code 200. 
+ Si une table sans nom existe déjà avec ce nombre de coups à jouer, le client est associé à cette table et le serveur envoie le code 201 au client avec un message confirmant le démarrage de la partie. Si ce n'est pas le cas, le serveur envoie le code 202 au client avec un message signifiant l'attente d'un adversaire. 
+ Lorsque la table contient les 2 adversaires, la partie démarre (voir 2.5).
+
+ 2.3 Mode 2 (créer une table avec nom)
+ Dans ce mode, le serveur poursuit avec le code 200 et un message demandant le nom de la table à créer. Le client répond avec la commande TNAME et le paramètre value contient la chaîne de caractères souhaitée. Si le nom est celui d'une table existante ou s'il est vide, le serveur répond avec le code 400 et propose de choisir un autre nom. Le client répète la commande TNAME jusqu'à acceptation par le serveur. Lorsque le serveur accepte le nom, il envoie le code 200 et demande le nombre de coups à jouer. Le client répond avec la commande NBROUNDS suivi du paramètre entier donnant le nombre de coups désiré. Tant que le paramètre est 0 ou n'est pas un entier, le serveur redemande le nombre de coups avec le code 400. Finalement, lorsque le serveur accepte le paramètre, il envoie le code 202 et signifie la mise en attente d'un adversaire.
+
+ 2.4 Mode 3 (rejoindre une table avec nom)
+ Dans ce mode, le serveur poursuit avec le code 200 et un message demandant le nom de la table à rejoindre. Le client répond avec la commande TNAME et le paramètre value contient le nom de la table souhaitée. Si le nom donné par le client est vide ou s'il ne correspond à aucune table existante, le serveur envoie le code d'erreur 500 (on pourra distinguer les 2 causes dans le message associé) et ferme la connexion avec le client. Sinon, il envoie au client le code 201 avec un message signifiant le début de la partie.
+
+ 2.5 La partie
+ Lorsque les 2 adversaires sont réunis (dont éventuellement une IA), la partie démarre. On décrit ici les interactions du serveur avec un des joueurs, elles sont symétriques avec l'autre (sauf IA...).
+ On note k le nombre de coups à jouer. Tant que k est strictement positif :
+   - le serveur envoie au joueur le code 300+k avec dans le message le score courant (0-0 à l'origine) dans l'ordre "score du joueur - score de l'adversaire" ;
+   - le client répond avec la commande PLAY et en paramètre son coup (0 pour pierre, 1 pour feuille, 2 pour ciseaux);
+   - après réception des 2 coups, le serveur décide qui gagne la manche (les ciseaux coupent la feuille, qui enveloppe la pierre, qui casse les ciseaux), met à jour le score et décrémente k s'il y un vainqueur pour la manche.
+ Lorsque k atteint 0, le serveur envoie au client le code 300 avec un message indiquant la victoire, la défaite ou le nul ainsi que le score final. Il ferme alors la connexion.
+
+3. Travail demandé
+
+Vous écrirez le code du serveur dans un fichier "servershifumi.py". Il doit pouvoir interagir avec le client proposé comme exemple (fichier "/shared/clientshifumi.py" dans le lab). Vous devrez :
+ 1/ (6pts) écrire la partie correspondant au mode 0 (jeu contre IA);
+ 2/ (14pts) écrire les parties restantes (modes 1, 2 et 3);
+ 3/ (2pts) Bonus : placer tous les messages envoyés ou reçus dans un fichier de log (shifumi.log) sous le format suivant : 
+   - chaque ligne correspond à un message
+   - un message envoyé est préfixé par '>>>' puis l'adresse IP de destination, puis la date et l'heure
+   - un message reçu est préfixé par '<<<' puis l'adresse IP source, puis la date et l'heure.
+
+Le bonus ne sera évalué que si le reste est fonctionnel.
+
+4. Réalisation, retour et évaluation
+
+Le travail est à effectuer en binôme ou individuellement. Vous écrirez un unique fichier "servershifumi.py" que vous placerez dans une archive "prenom1-nom1.prenom2-nom2.tar.gz (en remplaçant prénoms et noms par ceux de votre binôme) à déposer au plus tard le 21 novembre 2021 à 23h59 dans le dépôt prévu à cet effet pour votre groupe sur la page celene. Tous les binômes sont autorisés y compris entre Ingé et MIAGE, mais chaque binôme doit rendre un et un seul devoir dans l'un quelconque de vos dépôts si vous n'appartenez pas au même groupe.. 
+
+Des pénalités seront appliquées en cas de retard, d'archive mal formée (il ne faut pas mettre le lab dans l'archive !) ou mal nommée...
+
+L'évaluation sera réalisée en testant et en lisant votre code, le test aura lieu dans un lab similaire à celui qui vous est fourni.
+
+Le but est de fournir une application fonctionnelle : en cas d'erreur ou de message d'erreur sur une fonctionnalité, il n'y aura pas de point au titre de l'esthétique, de l'originalité ou d'un code partiellement correct. 

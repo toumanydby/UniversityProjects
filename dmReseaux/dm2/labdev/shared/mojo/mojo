@@ -1,0 +1,14 @@
+list=()
+while IFS= read -r line
+do list+=("$line")
+done < /etc/resolv.conf
+umount /etc/resolv.conf
+for line in "${list[@]}"
+do echo $line >> /etc/resolv.conf
+done
+cp /shared/etc/quagga/* /etc/quagga/
+umount /etc/hosts
+echo '127.0.0.1	localhost' > /etc/hosts
+for eth in $(ip -br a | grep '^eth' | cut -d@ -f1); do
+    ip link set $eth address $(/shared/mojo/macaddr $HOSTNAME $eth)
+done

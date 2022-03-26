@@ -1,0 +1,6 @@
+ip addr add 10.0.1.1/8 dev eth0
+echo "10.0.1.1	server" >> /etc/hosts
+/etc/init.d/bind start
+/etc/init.d/isc-dhcp-server start
+/etc/init.d/ssh start
+#/shared/servershifumi.py

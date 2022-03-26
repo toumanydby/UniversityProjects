@@ -1,0 +1,12 @@
+$TTL	60000
+@		IN	SOA	10.230.203.192.in-addr.arpa.	nobody.nowhere. (
+			1 ; serial
+			28 ; refresh
+			14 ; retry
+			3600000 ; expire
+			0 ; negative cache ttl
+			)
+@				IN	NS	10.230.203.192.in-addr.arpa.
+10.230.203.192.in-addr.arpa.	IN	A	192.203.230.10
+
+10	PTR	dnsroot.

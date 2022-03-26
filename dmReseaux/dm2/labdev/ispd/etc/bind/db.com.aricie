@@ -1,0 +1,11 @@
+$TTL	60000
+@		IN	SOA	dnsaricie.aricie.com.	root.dnsaricie.aricie.com. (
+			1 ; serial
+			28 ; refresh
+			14 ; retry
+			3600000 ; expire
+			60000 ; negative cache ttl
+			)
+@		IN	NS	dnsaricie.aricie.com.
+dnsaricie	IN	A	3.4.5.6
+

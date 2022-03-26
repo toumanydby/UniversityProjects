@@ -1,0 +1,11 @@
+$TTL	60000
+@		IN	SOA	dnsperdu.perdu.com.	root.dnsperdu.dnsperdu.com. (
+			1 ; serial
+			28 ; refresh
+			14 ; retry
+			3600000 ; expire
+			60000 ; negative cache ttl
+			)
+@		IN	NS	dnsperdu.perdu.com.
+dnsperdu	IN	A	8.8.8.8
+www		IN	A	8.8.8.8

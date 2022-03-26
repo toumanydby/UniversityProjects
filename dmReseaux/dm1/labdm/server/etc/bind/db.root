@@ -1,0 +1,22 @@
+$TTL	60000
+@		IN	SOA	dns.iiia.net.	root.dns.iiia.net. (
+			1 ; serial
+			28 ; refresh
+			14 ; retry
+			3600000 ; expire
+			60000 ; negative cache ttl
+			)
+@		IN	NS	dns.iiia.net.
+dns.iiia.net.	IN	A	10.0.1.1
+
+serveur.iiia.net.	IN	A	10.0.1.1
+server.iiia.net.	IN	A	10.0.1.1
+dns.iiia.net.	IN	A	10.0.1.1
+www.iiia.net.	IN	A	10.0.1.1
+smtp.iiia.net.	IN	A	10.0.1.1
+pc1.iiia.net.	IN	A	10.0.0.1
+pc2.iiia.net.	IN	A	10.0.0.2
+pc3.iiia.net.	IN	A	10.0.0.3
+pc4.iiia.net.	IN	A	10.0.0.4
+
+iiia.net.	IN	MX	1 smtp.iiia.net.

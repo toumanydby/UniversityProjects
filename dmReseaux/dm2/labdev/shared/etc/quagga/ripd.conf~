@@ -1,0 +1,6 @@
+hostname ripd
+password zebra
+router rip
+redistribute connected
+redistribute kernel
+network 10.0.0.0/8

@@ -1,0 +1,5 @@
+ip addr add 172.16.0.3/16 dev eth0
+ip addr add 8.8.8.8/24 dev eth1
+/etc/init.d/quagga start
+/etc/init.d/bind start
+apache2ctl start

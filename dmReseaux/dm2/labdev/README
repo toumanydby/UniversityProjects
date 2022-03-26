@@ -1,0 +1,76 @@
+Devoir de TP de L3 Réseaux
+
+L'objectif de ce devoir est de configurer le réseau de votre petite entreprise raccordée à internet : configuration des interfaces, des routes, DHCP, DNS, NAT, pare-feu. 
+
+== The big picture ==
+
+Vous disposez pour votre petite entreprise d'un bloc d'adresses privées que vous allez découper en 3 sous-réseaux :
+- le réseau de la direction lana contient la machine (alice) de la pdg et doit pouvoir accueillir au moins 10 hôtes différents.
+- le réseau principal lanb contient la machine du tourneur-fraiseur (bob) et doit pouvoir accueillir au moins 250 hôtes différents.
+- le réseau des services lanc contient le serveur web (www) et doit pouvoir accueillir au moins 200 hôtes différents.
+
+Ces 3 réseaux sont tous reliés à un routeur (box) qui dispose en plus d'une interface sur le réseau 1.2.3.0/24 et d'une connexion à internet en utilisant la passerelle 1.2.3.4 (machine isp). La machine (isp) vous servira aussi de résolveur DNS et de serveur DNS administrant les noms de votre domaine : "ara.com".
+
+Vous utiliserez comme paramètres (bloc d'adresses privées et adrese publique de (box)) le couple de  paramètres proposé sur celene pour l'un ou l'autre des membres du binôme.
+
+Il est interdit de modifier "lab.conf", la structure du réseau ne doit pas être modifiée !
+
+== Ce qui est à configurer ==
+
+Seuls sont à modifier les fichiers mentionnés dans cette section. Des tests vous sont proposés suite à certaines parties de la configuration.
+
+Votre travail consiste à configurer les machines et services suivants :
+(4 points)
+ - attribuer des blocs d'adresses à lana, lanb et lanc puis configurer les interfaces et routes de (box) pour permettre la transmission du traffic intérieur.
+
+(4 points)
+ - configurer le serveur DHCP sur (box) en donnant une adresse statique à (www) et en distribuant des adresses dynamiques sur les réseaux lana, lanb et lanc. On proposera 1.2.3.4 comme adresse de résolveur DNS.
+   	      (alice) ping @boxeth1
+ - configurer un service de NAT sur (box) avec iptables pour autoriser les hôtes de lana, lanb et lanc à accéder à internet.
+ 	      (alice) ping 1.2.3.4
+   	      (bob) lynx www.perdu.com
+ - configurer un service de NAT sur (box) pour autoriser des connexions depuis internet vers "www.ara.com".
+   	      (diane) lynx @boxeth0
+
+(4 points)
+ - configurer le serveur DNS sur (isp) pour qu'il gère les machines de votre domaine : "www.ara.com" et "dnsara.ara.com" hébergé par (isp). (fichiers "/etc/bind/db.com.ara" et "db.1.2.3")
+   	      (diane) lynx www.ara.com
+
+(8 points)
+ Pour la suite de la configuration, on se propose d'interdire autant que possible le transit de paquets non nécessaires par (box). Pour cela on ajoute les lignes suivantes au début du fichier "box.startup" :
+      #initialiser les chaines
+      iptables -t filter -F FORWARD
+      iptables -t filter -F INPUT
+      iptables -t filter -F OUTPUT
+      iptables -t nat -F PREROUTING
+      iptables -t nat -F POSTROUTING
+
+      #comportement par defaut : drop
+      iptables -t filter -P FORWARD DROP
+      iptables -t filter -P INPUT DROP
+      iptables -t filter -P OUTPUT DROP
+
+      #connexions locales
+      iptables -t filter -A INPUT -i lo -j ACCEPT
+      iptables -t filter -A OUTPUT -o lo -j ACCEPT	
+      
+ - ajouter des règles à la chaîne FORWARD pour que les services de NAT déjà configurés continuent d'opérer.
+   	      (bob) lynx www.perdu.com
+	      (diane) lynx www.ara.com
+ - démarrer un serveur ssh sur (box) et autoriser la connexion depuis lana uniquement (login/mdp=guest/guest).
+   	      (alice) ssh guest@'@box'
+   	      PAS DE CONNEXION (bob) ssh @box
+ - ajouter des règles de NAT sur (box) pour autoriser des connexions depuis lana et lanb vers "www.ara.com".
+   	      (alice) lynx www.ara.com
+ - vous ne souhaitez pas autoriser vos salariés ayant des machines dans lanb à se connecter sur le site subversif "www.ahcaira.com", il faut donc ajouter une règle de filtrage avec l'utilitaire iptables sur (box). Évidemment les utilisateurs connectés sur lana gardent le droit d'accéder à cette page web.
+   	      PAS DE CONNEXION (bob) lynx www.ahcaira.com
+	      (bob) lynx www.perdu.com
+	      (alice) lynx www.ahcaira.com
+ 
+== Modalités de retour du devoir ==
+
+Le devoir est à traiter en binôme (ou monôme). La solution est à déposer sous la forme d'une archive nommée nom1.prenom1_nom2.prenom2.tar.gz sur la page Celene du cours. 
+
+L'archive doit contenir :
+ - un rapport au format PDF qui reprend les noms des membres du binôme, les paramètres utilisés et qui explique brièvement le travail effectué.
+ - le lab modifié par vos soins.
