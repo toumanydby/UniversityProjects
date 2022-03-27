@@ -4,7 +4,7 @@
 
 ### BarjoKart 
 
-Application developpé en C/C++
+Application developpée en C/C++
 
 * Pas de moteurs, pas de volant, pas de freins, pas de ceinture, pas de peur: les véhicules du barjo-kart sont des caddies de supermarché que des pilotes téméraires manœuvrent tant bien que mal en donnant des coups de perche sur le sol. 
 * Entre deux coups de perches, ils se déplacent donc en ligne droite; À bourd de ces bolides, il est tout aussi laborieux d’accélérer, de décélérer que de changer de direction. 
@@ -14,7 +14,7 @@ Application developpé en C/C++
 
 ### Conception et Développement d'une Application d'Anonymisation de Données ( CDApp )
 
-Application developpé en Java
+Application developpée en Java
 
 * L'anonymisation des données est devenue depuis quelques années un enjeu majeur. 
 * L'augmentation des données collectées et le besoin d'analyser ces dernières tout en respectant la vie privée imposent d'utiliser des techniques d'anonymisation efficaces. 
@@ -23,7 +23,7 @@ Application developpé en Java
 
 ### Jeu de Nim
 
-Application developpé en Java
+Application developpée en Java
 
 * Il existe de nombreuses variantes des jeux de Nim dans lesquels deux joueurs jouent à tour de rôle avec des allumettes, des pièces, des graines ou toute autre type d'objets.
 * On jouera, pour ce projet, avec des allumettes. En disposant ces allumettes les unes à côtés des autres, on forme un tas d'allumettes. 
@@ -34,7 +34,7 @@ Application developpé en Java
 
 Application developpée en Symfony.
 
-* Il s'agit de développer une application Web permettant à différents utilisateurs d'effectuer dese actions en fonction de leur role.
+* Il s'agit d'une application Web permettant à différents utilisateurs d'effectuer des actions en fonction de leur role.
 * Differents roles à savoir : ROLE_ADMIN, ROLE_ENFANT, ROLE_ANIMATEUR
 * Gestion des droits d'accès
 * Utilisation de bootstrap
@@ -44,4 +44,4 @@ Application developpée en Symfony.
 
 Applications developpées en Python.
 
-* Il s'agit de mini projets effectué en reseaux en Python. Qui parlent globalement sur la creation d'un lab de machines, sur la gestion coté serveur d'un jeu en ligne...
+* Il s'agit de mini projets de reseaux effectués en Python. Qui parlent globalement sur la creation d'un lab de machines, sur la gestion coté serveur d'un jeu en ligne...
